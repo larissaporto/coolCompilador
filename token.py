@@ -1,33 +1,6 @@
 import re 
 
-class ScannerSimples(ScannerGenerico):
-    def __init__(self):
-        ScannerGenerico.__init__(self)
-    
-    def tokenize(self, input):
-        self.rv = []
-        ScannerGenerico.tokenize(self, input)
-        return self.rv
-    
-    def t_whitespace(self, s):
-        r" \s+ "
-        pass
-        
-    def t_op(self, s):
-        r" \+ | \* "
-        self.rv.append(Token(type=s))
-        
-    def t_number(self, s):
-        r" \d+ "
-        t = Token(type='number', attr=s)
-        self.rv.append(t)
-		
-def scan(f):
-    input = open("test.cl", r)
-    scanner = ScannerSimples()
-    return scanner.tokenize(input)
 
-		
 		
 ##### Lista de Tokens
 class Tokens ():
