@@ -85,3 +85,5 @@ class afd:
         else:
             novoEstado = Sfinal
         return (novoEstado)
+
+    #falta comentários
