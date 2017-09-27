@@ -54,26 +54,26 @@ class Tokens:
 
 		}
 
-	EPAREN = r'\('        # (
-    DPAREN = r'\)'        # )
-    ACHAVE = r'\{'        # {
-    FCHAVE = r'\}'        # }
-    DPONT = r'\:'         # :
-    VIRGU = r'\,'         # ,
-    PONTO = r'\.'         # .
-    PONTOVIRG = r'\;'     # ;
-    ARROBA = r'\@'        # @
-    MULTIPLI = r'\*'      # *
-    DIVISA = r'\/'        # /
-    ADIC = r'\+'          # +
-    MENOS = r'\-'         # -
-    TIL = r'~'            # ~
-    MQ = r'\<'            # <
-    IG = r'\='            # =
-    MQIG = r'\<\='        # <=
-    SETAESQ = r'\<\-'     # <-
-    NAO = r'not'          # not
-    FLECHA = r'\=\>'      # =>
+	PARENTESES_ESQUERDA = 	chr(40)        # (
+    PARENTESES_DIREITA = 	chr(41)        # )
+    ABRE_CHAVE = 			chr(123)        # {
+    FECHA_CHAVE = 			chr(125)        # }
+    DOIS_PONTOS = 			chr(58)         # :
+    VIRGULA = 				chr(44)         # ,
+    PONTO = 				chr(46)         # .
+    PONTO_VIRGULA = 		chr(59)     # ;
+    ARROBA = 				chr(64)        # @
+    MULTIPLICACAO = 		chr(42)      # *
+    DIVISAO = 				chr(47)        # /
+    ADICAO = 				chr(43)          # +
+    MENOS = 				chr(45)      # -
+    TIL = 					chr(126)           # ~
+    MENOR_QUE = 			chr(60)            # <
+    IGUAL = 				chr(61)           # =
+    MAIOR_QUE_IGUAL = 		'<='        # <=
+    SETA_ESQUERDA = 		'<-'     # <-
+    NAO = 					'not'     # not
+    FLECHA = 				'=>'      # =>
 
 
 	#Regras
