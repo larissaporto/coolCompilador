@@ -36,8 +36,8 @@ class AfdSimples(object):
         if not self.proxEstados:
             raise ValueError ("Sem transições definidas do estado {0} com valor '{1}'".format(self.estadoAtual, valor))
 
-        elif len(self.proxEstados) > 1:
-            raise ValueError ("Transições ambíguas do estado {0} com valor '{1}' -> Novos estados definidos {2}".format(self.estadoAtual, valor, [x[0] for x in self.proxEstados]))
+#        elif len(self.proxEstados) > 1:
+#            raise ValueError ("Transições ambíguas do estado {0} com valor '{1}' -> Novos estados definidos {2}".format(self.estadoAtual, valor, [x[0] for x in self.proxEstados]))
         else:
             if len(self.proxEstados[0]) == 4:
                 atual, next, condicao, callback = self.proxEstados[0]
@@ -46,7 +46,7 @@ class AfdSimples(object):
                 callback = None
 
             self.estadoAtual, mudou = (next, True) \
-                if self.estadoAtual != next else (proximo, False)
+                if self.estadoAtual != next else (next, False)
 #volta
             if callable(callback):
                 callback(self, valor)
