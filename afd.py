@@ -49,11 +49,11 @@ class afd:
     def comeca_transicoes(caractere):
         if caractere == chr(32):  #espaço em ascii
             novoEstado = comeca_transicoes
-        elif chr(47) < caractere > chr(58): #dígito em ascii
+        elif chr(47) < caractere < chr(58): #dígito em ascii
             novoEstado = integ
-        elif chr(64) < caractere > chr(91): #letra maiúscula em ascii
+        elif chr(64) < caractere < chr(91): #letra maiúscula em ascii
             novoEstado = S2
-        elif chr(96) < caractere > chr(123): #letra minúscula em ascii
+        elif chr(96) < caractere < chr(123): #letra minúscula em ascii
             novoEstado = S3
         elif caractere == chr(45): # - em ascii
             novoEstado = S4
@@ -69,7 +69,8 @@ class afd:
         return (novoEstado)
 
     def S2(caractere):
-        if chr(47) < caractere > chr(58) or chr(64) < caractere > chr(91) or chr(96) < caractere > chr(123):
+        if chr(47) < caractere < chr(58) or chr(64) < caractere < chr(91) or \
+        chr(96) < caractere < chr(123):
             novoEstado = S2
         elif caractere == chr(95):
             novoEstado = S2
