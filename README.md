@@ -1,5 +1,4 @@
-coolCompilador 1233
+c
+Compilador 1233
 222
 33
-aaaa
-BBBBB

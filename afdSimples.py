@@ -59,12 +59,72 @@ class AfdSimples(object):
 #guardar o objeto para cada token
 class token(object):
     """docstring for token."""
+
+
     def __init__(self, tipo):
         self.tokenTipo = tipo
         self.tokenTexto = ""
+        self.tipo = ""
 
     def adicionaChar(self, char):
         self.tokenTexto += char
+
+    def determinaTipo(self):
+        reservadas = ('abstract', 'case', 'class', 'catch', 'do', 'def', 'else', \
+                        'esac', 'fi', 'final', 'finally', 'for', 'forSome', 'explicit', \
+                        'implicit', 'lazy', 'match', 'native', 'null', 'object', 'override', \
+                        'package', 'private', 'protected', 'requires', 'return', 'sealed', \
+                        'super', 'this', 'throw', 'trait', 'try', 'type', 'val', 'var', 'with' \
+                        'yield', 'in', 'inherits', 'isvoid', 'let', 'loop', 'new', 'of', \
+                        'pool', 'self', 'then', 'while')
+
+        if self.tokenTexto in reservadas:
+            self.tipo = 'reservada'
+        elif self.tokenTexto == chr(40):
+            self.tipo = 'PARENTESES_ESQUERDA'
+        elif self.tokenTexto == chr(41):
+            self.tipo = 'PARENTESES_DIREITA'
+        elif self.tokenTexto == chr(123):
+            self.tipo = 'ABRE_CHAVE'
+        elif self.tokenTexto == chr(125):
+            self.tipo = 'FECHA_CHAVE'
+        elif self.tokenTexto == chr(58):
+            self.tipo = 'DOIS_PONTOS'
+        elif self.tokenTexto == chr(44):
+            self.tipo = 'VIRGULA'
+        elif self.tokenTexto == chr(46):
+            self.tipo = 'PONTO'
+        elif self.tokenTexto == chr(59):
+            self.tipo = 'PONTO_VIRGULA'
+        elif self.tokenTexto == chr(64):
+            self.tipo = 'ARROBA'
+        elif self.tokenTexto == chr(42):
+            self.tipo = 'MULTIPLICACAO'
+        elif self.tokenTexto == chr(47):
+            self.tipo = 'DIVISAO'
+        elif self.tokenTexto == chr(43):
+            self.tipo = 'ADICAO'
+        elif self.tokenTexto == chr(45):
+            self.tipo = 'MENOS'
+        elif self.tokenTexto == chr(126):
+            self.tipo = 'TIL'
+        elif self.tokenTexto == chr(60):
+            self.tipo = 'MENOR_QUE'
+        elif self.tokenTexto == chr(61):
+            self.tipo = 'IGUAL'
+        elif self.tokenTexto == '<=':
+            self.tipo = 'MAIOR_QUE_IGUAL'
+        elif self.tokenTexto == '<-':
+            self.tipo = 'SETA_ESQUERDA'
+        elif self.tokenTexto == 'not':
+            self.tipo = 'NEGACAO'
+        elif self.tokenTexto == '=>':
+            self.tipo = 'FLECHA'
+        else:
+            self.tipo = 'Identifier'
+
+        return self.tipo
+
 
 #    def tokenCompara(self):
 #tem que implementar com as palavras reservardas e . , = + etc...
@@ -85,8 +145,12 @@ class tokenLista(object):
         self.tokenAtual.adicionaChar(valor)
 
     def fimToken(self, maquina, valor):
-        self.tokenLista.append(self.tokenAtual)
+        a = token(maquina.EstadoAtual())
+        b = a.determinaTipo()
+
+        self.tokenLista.append([a.tokenTexto, b])
         self.tokenAtual = None
+
 
 if __name__ == "__main__":
 
@@ -123,6 +187,8 @@ if __name__ == "__main__":
           break
         print ("Read a character:", c)
         ret = maq.evento(c)
+#        if ret[0] != "Start" or (ret[0] == "Start" and ret[1] == False):
+#            c = a.read(1)
 
     ret = maq.evento("")
     print (t.tokenLista)
