@@ -121,7 +121,11 @@ class token(object):
         elif self.tokenTexto == '=>':
             self.tipo = 'FLECHA'
         else:
-            self.tipo = 'Identifier'
+
+            if self.tokenTexto[0:1] == '--':
+                self.tipo = 'COMENTARIO'
+            else:
+                self.tipo = 'Identifier'
 
         return self.tipo
 
@@ -160,27 +164,36 @@ if __name__ == "__main__":
 
     t = tokenLista()
 
-    maq = AfdSimples ( [ ("Inicio", "Inicio", lambda x: x == chr(32) ),
-                         ("Inicio", "Digito", lambda x: chr(47) < x < chr(58), t.inicioToken ),
-                         ("Digito", "Digito", lambda x: chr(47) < x < chr(58), t.adicionaChar ),
-                         ("Digito", "Digito1", lambda x: x == chr(46), t.adicionaChar ),
-                         ("Digito1", "Digito1", lambda x: chr(47) < x < chr(58), t.adicionaChar ),
-                         ("Digito1", "Inicio", lambda x: x < chr(48) or x > chr(57), t.fimToken ),
-                         ("Digito", "Inicio", lambda x: x < chr(48) or x > chr(57), t.fimToken ),
-                         ("Inicio", "Identifier", lambda x: chr(96) < x < chr(123), t.inicioToken ),
-                         ("Identifier", "Identifier", lambda x: chr(96) < x < chr(123) or \
-                          chr(64) < x < chr(91) or x == chr(95), t.adicionaChar ),
-                         ("Identifier", "Inicio", lambda x: x < chr(97) or x > chr(122) or \
-                          x < chr(65) or x > chr(90) or x != chr(95), t.fimToken ),
-                         ("Inicio", "Type", lambda x: chr(64) < x < chr(91), t.inicioToken ),
-                         ("Type", "Type", lambda x: chr(96) < x < chr(123) or \
-                          chr(64) < x < chr(91) or x == chr(95), t.adicionaChar ),
-                         ("Type", "Type", lambda x: x < chr(97) or x > chr(122) or \
-                          x < chr(65) or x > chr(90) or x != chr(95), t.fimToken )
-                         #falta comentário com as strings
-                        ]
+    maq = AfdSimples (
+        [
+            ("Inicio", "Inicio", lambda x: ord(x) == 32 or ord(x) == 10),
+            ("Inicio", "Digito", lambda x: 47 < ord(x) < 58, t.inicioToken ),
+            ("Digito", "Digito", lambda x: 47 < ord(x) < 58, t.adicionaChar ),
+            ("Digito", "Digito1", lambda x: ord(x) == 46, t.adicionaChar ),
+            ("Digito1", "Digito1", lambda x: 47 < ord(x) < 58, t.adicionaChar ),
+            ("Digito1", "Inicio", lambda x: ord(x) < 48 or ord(x) > 57, t.fimToken ),
+            ("Digito", "Inicio", lambda x: ord(x) < 48 or ord(x) > 57, t.fimToken ),
+            ("Inicio", "Identifier", lambda x: 96 < ord(x) < 123, t.inicioToken ),
+            ("Identifier", "Identifier", lambda x: 96 < ord(x) < 123 or \
+                64 < ord(x) < 91 or ord(x) == 95, t.adicionaChar ),
+            ("Identifier", "Inicio", lambda x: ord(x) < 97 or ord(x) > 122 or \
+                ord(x) < 65 or ord(x) > 90 or ord(x) != 95, t.fimToken ),
+            ("Inicio", "Type", lambda x: 64 < ord(x) < 91, t.inicioToken ),
+            ("Type", "Type", lambda x: 96 < ord(x) < 123 or \
+                64 < ord(x) < 91 or ord(x) == 95, t.adicionaChar ),
+            ("Type", "Type1", lambda x: 32 < ord(x) < 97 or ord(x) > 122 or \
+                32 < ord(x) < 65 or ord(x) > 90 or ord(x) != 95 and ord(x) != 32 and ord(x) != 10, t.adicionaChar ),
+            ("Type1", "Type1", lambda x: 32 < ord(x) < 97 or ord(x) > 122 or \
+                32 < ord(x) < 65 or ord(x) > 90 or ord(x) != 95 and ord(x) != 32 and ord(x) != 10, t.adicionaChar ),
+            ("Type", "Inicio", lambda x: ord(x) == 32 or ord(x) == 10 , t.fimToken),
+            ("Type1", "Inicio", lambda x: ord(x) == 32 or ord(x) == 10 , t.fimToken),
+            ("Inicio", "Comentario", lambda x: ord(x) == 45, t.inicioToken),
+            ("Comentario", "Comentario1", lambda x: ord(x) == 45, t.adicionaChar),
+            ("Comentario1", "Comentario1", lambda x: ord(x) != 10, t.adicionaChar),
+            ("Comentario1", "Inicio", lambda x: ord(x) == 10, t.fimToken)
+        ]
 
-                        )
+    )
     maq.inicio("Inicio")
 
     with open('ReadMe2.md') as a:
@@ -194,5 +207,5 @@ if __name__ == "__main__":
 #        if ret[0] != "Start" or (ret[0] == "Start" and ret[1] == False):
 #            c = a.read(1)
 
-    ret = maq.evento("")
+#       ret = maq.evento("")
     print (t.tokenLista)
