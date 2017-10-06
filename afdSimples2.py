@@ -39,6 +39,7 @@ class AfdSimples(object):
 #        elif len(self.proxEstados) > 1:
 #            raise ValueError ("Transições ambíguas do estado {0} com valor '{1}' -> Novos estados definidos {2}".format(self.estadoAtual, valor, [x[0] for x in self.proxEstados]))
         else:
+            print(self.proxEstados)
             if len(self.proxEstados[0]) == 4:
                 atual, next, condicao, callback = self.proxEstados[0]
             else:
@@ -190,7 +191,12 @@ if __name__ == "__main__":
             ("Inicio", "Comentario", lambda x: ord(x) == 45, t.inicioToken),
             ("Comentario", "Comentario1", lambda x: ord(x) == 45, t.adicionaChar),
             ("Comentario1", "Comentario1", lambda x: ord(x) != 10, t.adicionaChar),
-            ("Comentario1", "Inicio", lambda x: ord(x) == 10, t.fimToken)
+            ("Comentario1", "Inicio", lambda x: ord(x) == 10, t.fimToken),
+            ("Inicio", "Comentario2", lambda x: ord(x) == 42, t.inicioToken),
+            ("Comentario2", "Comentario2", lambda x: ord(x) != 42, t.adicionaChar),
+            ("Comentario2", "Comentario3", lambda x: ord(x) == 42, t.adicionaChar),
+            ("Comentario3", "Comentario2", lambda x: ord(x) != 10, t.adicionaChar),
+            ("Comentario3", "Inicio", lambda x: ord(x) == 10, t.fimToken)
         ]
 
     )
@@ -203,6 +209,7 @@ if __name__ == "__main__":
           print ("End of file")
           break
         print ("Read a character:", c)
+        
         ret = maq.evento(c)
 #        if ret[0] != "Start" or (ret[0] == "Start" and ret[1] == False):
 #            c = a.read(1)
