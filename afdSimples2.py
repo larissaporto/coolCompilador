@@ -39,7 +39,6 @@ class AfdSimples(object):
 #        elif len(self.proxEstados) > 1:
 #            raise ValueError ("Transições ambíguas do estado {0} com valor '{1}' -> Novos estados definidos {2}".format(self.estadoAtual, valor, [x[0] for x in self.proxEstados]))
         else:
-            print(self.proxEstados)
             if len(self.proxEstados[0]) == 4:
                 atual, next, condicao, callback = self.proxEstados[0]
             else:
@@ -122,8 +121,8 @@ class token(object):
         elif self.tokenTexto == '=>':
             self.tipo = 'FLECHA'
         else:
-
-            if self.tokenTexto[0:1] == '--':
+            tamanho = len(self.tokenTexto)
+            if self.tokenTexto[0:1] == '--' or tamanho > 0 and self.tokenTexto[0] == '*' and self.tokenTexto[tamanho-1] == '*':
                 self.tipo = 'COMENTARIO'
             else:
                 self.tipo = 'Identifier'
@@ -156,7 +155,7 @@ class tokenLista(object):
     def fimToken(self, maquina, valor):
         a = token(maquina.EstadoAtual())
         b = a.determinaTipo()
-
+        
         self.tokenLista.append(self.tokenAtual)
         self.tokenAtual = None
 
@@ -203,14 +202,14 @@ if __name__ == "__main__":
     maq.inicio("Inicio")
 
     with open('ReadMe2.md') as a:
-      while True:
-        c = a.read(1)
-        if not c:
-          print ("End of file")
-          break
-        print ("Read a character:", c)
-        
-        ret = maq.evento(c)
+        while True:
+            c = a.read(1)
+            if not c:
+                print ("End of file")
+                break
+            print ("Read a character:", c)
+
+            ret = maq.evento(c)
 #        if ret[0] != "Start" or (ret[0] == "Start" and ret[1] == False):
 #            c = a.read(1)
 
