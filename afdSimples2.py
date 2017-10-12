@@ -80,38 +80,6 @@ class token(object):
 
         if self.tokenTexto in reservadas:
             self.tipo = 'reservada'
-        elif self.tokenTexto == chr(40):
-            self.tipo = 'PARENTESES_ESQUERDA'
-        elif self.tokenTexto == chr(41):
-            self.tipo = 'PARENTESES_DIREITA'
-        elif self.tokenTexto == chr(123):
-            self.tipo = 'ABRE_CHAVE'
-        elif self.tokenTexto == chr(125):
-            self.tipo = 'FECHA_CHAVE'
-        elif self.tokenTexto == chr(58):
-            self.tipo = 'DOIS_PONTOS'
-        elif self.tokenTexto == chr(44):
-            self.tipo = 'VIRGULA'
-        elif self.tokenTexto == chr(46):
-            self.tipo = 'PONTO'
-        elif self.tokenTexto == chr(59):
-            self.tipo = 'PONTO_VIRGULA'
-        elif self.tokenTexto == chr(64):
-            self.tipo = 'ARROBA'
-        elif self.tokenTexto == chr(42):
-            self.tipo = 'MULTIPLICACAO'
-        elif self.tokenTexto == chr(47):
-            self.tipo = 'DIVISAO'
-        elif self.tokenTexto == chr(43):
-            self.tipo = 'ADICAO'
-        elif self.tokenTexto == chr(45):
-            self.tipo = 'MENOS'
-        elif self.tokenTexto == chr(126):
-            self.tipo = 'TIL'
-        elif self.tokenTexto == chr(60):
-            self.tipo = 'MENOR_QUE'
-        elif self.tokenTexto == chr(61):
-            self.tipo = 'IGUAL'
         elif self.tokenTexto == '<=':
             self.tipo = 'MAIOR_QUE_IGUAL'
         elif self.tokenTexto == '<-':
@@ -195,41 +163,41 @@ if __name__ == "__main__":
             ("Comentario2", "Comentario2", lambda x: ord(x) != 42, t.adicionaChar),
             ("Comentario2", "Comentario3", lambda x: ord(x) == 42, t.adicionaChar),
             ("Comentario3", "Comentario2", lambda x: ord(x) != 10, t.adicionaChar),
-            ("Comentario3", "Inicio", lambda x: ord(x) == 10, t.fimToken)
-#            ("Inicio", "PARENTESES_ESQUERDA", lambda x: ord(x) == 40, t.inicioToken ),
-#            ("PARENTESES_ESQUERDA", "Inicio", True, t.fimToken ),
-#            ("Inicio", "PARENTESES_DIREITA", lambda x: ord(x) == 41, t.inicioToken ),
-#            ("PARENTESES_DIREITA", "Inicio", True, t.fimToken ),
-#            ("Inicio", "ABRE_CHAVE", lambda x: ord(x) == 123, t.inicioToken ),
-#            ("ABRE_CHAVE", "Inicio", True, t.fimToken ),
-#            ("Inicio", "FECHA_CHAVE", lambda x: ord(x) == 125, t.inicioToken ),
-#            ("FECHA_CHAVE", "Inicio", True, t.fimToken ),
-#            ("Inicio", "DOIS_PONTOS", lambda x: ord(x) == 58, t.inicioToken ),
-#            ("DOIS_PONTOS", "Inicio", True, t.fimToken ),
-#            ("Inicio", "VIRGULA", lambda x: ord(x) == 44, t.inicioToken ),
-#            ("VIRGULA", "Inicio", True, t.fimToken ),
-#            ("Inicio", "PONTO", lambda x: ord(x) == 46, t.inicioToken ),
-#            ("PONTO", "Inicio", True, t.fimToken ),
-#            ("Inicio", "PONTO_VIRGULA", lambda x: ord(x) == 59, t.inicioToken ),
-#            ("PONTO_VIRGULA", "Inicio", True, t.fimToken ),
-#            ("Inicio", "ARROBA", lambda x: ord(x) == 64, t.inicioToken ),
-#            ("ARROBA", "Inicio", True, t.fimToken ),
-#            ("Inicio", "MULTIPLICACAO", lambda x: ord(x) == 42, t.inicioToken ),
-#            ("MULTIPLICACAO", "Inicio", True, t.fimToken ),
-#            ("Inicio", "DIVISAO", lambda x: ord(x) == 47, t.inicioToken ),
-#            ("DIVISAO", "Inicio", True, t.fimToken ),
-#            ("Inicio", "ADICAO", lambda x: ord(x) == 43, t.inicioToken ),
-#            ("ADICAO", "Inicio", True, t.fimToken ),
-#            ("Inicio", "MENOS", lambda x: ord(x) == 45, t.inicioToken ),
-#            ("MENOS", "Inicio", True, t.fimToken ),
-#            ("Inicio", "TIL", lambda x: ord(x) == 126, t.inicioToken ),
-#            ("TIL", "Inicio", True, t.fimToken ),
-#            ("Inicio", "MENOR_QUE", lambda x: ord(x) == 60, t.inicioToken ),
-#            ("MENOR_QUE", "Inicio", True, t.fimToken ),
-#            ("Inicio", "IGUAL", lambda x: ord(x) == 61, t.inicioToken ),
-#            ("IGUAL", "Inicio", True, t.fimToken )
-#            ("Inicio", "EOF", lambda x: x == chr(3))
-#            ("EOF", "Inicio", True)
+            ("Comentario3", "Inicio", lambda x: ord(x) == 10, t.fimToken),
+            ("Inicio", "PARENTESES_ESQUERDA", lambda x: ord(x) == 40, t.inicioToken ),
+            ("PARENTESES_ESQUERDA", "Inicio", True, t.fimToken ),
+            ("Inicio", "PARENTESES_DIREITA", lambda x: ord(x) == 41, t.inicioToken ),
+            ("PARENTESES_DIREITA", "Inicio", True, t.fimToken ),
+            ("Inicio", "ABRE_CHAVE", lambda x: ord(x) == 123, t.inicioToken ),
+            ("ABRE_CHAVE", "Inicio", True, t.fimToken ),
+            ("Inicio", "FECHA_CHAVE", lambda x: ord(x) == 125, t.inicioToken ),
+            ("FECHA_CHAVE", "Inicio", True, t.fimToken ),
+            ("Inicio", "DOIS_PONTOS", lambda x: ord(x) == 58, t.inicioToken ),
+            ("DOIS_PONTOS", "Inicio", True, t.fimToken ),
+            ("Inicio", "VIRGULA", lambda x: ord(x) == 44, t.inicioToken ),
+            ("VIRGULA", "Inicio", True, t.fimToken ),
+            ("Inicio", "PONTO", lambda x: ord(x) == 46, t.inicioToken ),
+            ("PONTO", "Inicio", True, t.fimToken ),
+            ("Inicio", "PONTO_VIRGULA", lambda x: ord(x) == 59, t.inicioToken ),
+            ("PONTO_VIRGULA", "Inicio", True, t.fimToken ),
+            ("Inicio", "ARROBA", lambda x: ord(x) == 64, t.inicioToken ),
+            ("ARROBA", "Inicio", True, t.fimToken ),
+            ("Inicio", "MULTIPLICACAO", lambda x: ord(x) == 42, t.inicioToken ),
+            ("MULTIPLICACAO", "Inicio", True, t.fimToken ),
+            ("Inicio", "DIVISAO", lambda x: ord(x) == 47, t.inicioToken ),
+            ("DIVISAO", "Inicio", True, t.fimToken ),
+            ("Inicio", "ADICAO", lambda x: ord(x) == 43, t.inicioToken ),
+            ("ADICAO", "Inicio", True, t.fimToken ),
+            ("Inicio", "MENOS", lambda x: ord(x) == 45, t.inicioToken ),
+            ("MENOS", "Inicio", True, t.fimToken ),
+            ("Inicio", "TIL", lambda x: ord(x) == 126, t.inicioToken ),
+            ("TIL", "Inicio", True, t.fimToken ),
+            ("Inicio", "MENOR_QUE", lambda x: ord(x) == 60, t.inicioToken ),
+            ("MENOR_QUE", "Inicio", True, t.fimToken ),
+            ("Inicio", "IGUAL", lambda x: ord(x) == 61, t.inicioToken ),
+            ("IGUAL", "Inicio", True, t.fimToken ),
+            ("Inicio", "EOF", lambda x: x == chr(3)),
+            ("EOF", "Inicio", True)
         ]
 
     )
@@ -240,8 +208,8 @@ if __name__ == "__main__":
             c = a.read(1)
             if not c:
                 print ("End of file")
-#               b = chr(3)
-#               ret = maq.evento(b)
+                b = chr(3)
+                ret = maq.evento(b)
                 break
             print ("Read a character:", c)
 
