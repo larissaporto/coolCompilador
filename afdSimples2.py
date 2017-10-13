@@ -218,4 +218,5 @@ if __name__ == "__main__":
 #            c = a.read(1)
 
 #       ret = maq.evento("")
+    print (t.tokenLista, file = open('saida.txt', 'a'))
     print (t.tokenLista)
